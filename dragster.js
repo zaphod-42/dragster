@@ -10,19 +10,45 @@
  *
  * Date: 2015-08-10T20:30Z
  */
-(function (window, document) {
+;(function (factory) {
+    var moduleName = 'dragster',
+        typeUndefined = 'undefined';
+
+    // CommonJS
+    if (typeof exports === 'object' && typeof module !== typeUndefined) {
+        module.exports = factory(require(moduleName));
+    // RequireJS
+    } else if (typeof define === 'function' && define.amd) {
+        define([moduleName], factory);
+    // <script>
+    } else {
+        var context;
+
+        if (typeof window !== typeUndefined) {
+            context = window;
+        } else if (typeof global !== typeUndefined) {
+            context = global;
+        } else if (typeof self !== typeUndefined) {
+            context = self;
+        } else {
+            context = this;
+        }
+        context.Dragster = factory(context.Dragster);
+    }
+})(function (Dragster) {
     'use strict';
 
-    window.Dragster = function (params) {
-        var CLASS_DRAGGING = 'is-dragging',
+    Dragster = function (params) {
+        var PREFIX = 'dragster',
+            CLASS_DRAGGING = 'is-dragging',
             CLASS_DRAGOVER = 'is-drag-over',
-            CLASS_DRAGGABLE = 'dragster-draggable',
-            CLASS_REGION = 'dragster-drag-region',
-            CLASS_PLACEHOLDER = 'dragster-drop-placeholder',
-            CLASS_TEMP_ELEMENT = 'dragster-temp',
-            CLASS_TEMP_CONTAINER = 'dragster-temp-container',
-            CLASS_HIDDEN = 'dragster-is-hidden',
-            CLASS_REPLACABLE = 'dragster-replacable',
+            CLASS_DRAGGABLE = PREFIX + '-draggable',
+            CLASS_REGION = PREFIX + '-drag-region',
+            CLASS_PLACEHOLDER = PREFIX + '-drop-placeholder',
+            CLASS_TEMP_ELEMENT = PREFIX + '-temp',
+            CLASS_TEMP_CONTAINER = CLASS_TEMP_ELEMENT + '-container',
+            CLASS_HIDDEN = PREFIX + '-is-hidden',
+            CLASS_REPLACABLE = PREFIX + '-replacable',
             EVT_TOUCHSTART = 'touchstart',
             EVT_TOUCHMOVE = 'touchmove',
             EVT_TOUCHEND = 'touchend',
@@ -619,4 +645,6 @@
             }
         };
     };
-})(window, window.document);
+
+    return Dragster;
+});

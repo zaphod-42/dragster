@@ -4,7 +4,7 @@
   "description": "Tiny vanilla JS plugin that enables drag'n'drop interactions to a user of your website",
   "main": "dragster.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "minify": "uglifyjs dragster.js -m --comments -o dragster.min.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/sunpietro/dragster/issues"
   },
-  "homepage": "https://github.com/sunpietro/dragster"
+  "homepage": "https://github.com/sunpietro/dragster",
+  "devDependencies": {
+    "uglify-js": "^2.6.2",
+    "uglifyjs": "^2.4.10"
+  }
 }

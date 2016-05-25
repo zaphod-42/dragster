@@ -22,6 +22,12 @@ body {
     text-align: center;
 }
 
+img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+}
+
 [draggable] {
   -moz-user-select: none;
   -khtml-user-select: none;
